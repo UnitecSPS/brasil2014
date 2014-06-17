@@ -1,0 +1,34 @@
+%h1 ALBUM PANINI
+%p Listado de Paises con sus jugadores
+
+- if @countries.instance_of?(Array)
+  %table{ border: "1"}
+    %tr
+      %th Nombre
+      %th Posicion
+      %th email
+      %th Jugadores
+    - @countries.each do |country|
+      %tr
+        %td= country["name"]
+        %td= country["position"]
+        %td= country["email"]
+        %td
+          - if country["players"].any?
+            %table{ border: "1"}
+              %tr
+                %th # Vista
+                %th Nombre
+                %th Team
+              - country["players"].each do |player|
+                %tr
+                  %td= player["number"]
+                  %td= player["name"]
+                  %td= player["team"]
+          - else
+            No tiene Jugadores
+- else
+  %strong
+    %em Error al sacar los datos del Web Service
+    = @countries
+
